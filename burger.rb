@@ -33,6 +33,7 @@ end
 
 n = ARGV.empty? ? 1 : ARGV[0].to_i
 
+couponcodes = []
 threads = []
 
 n.times {
@@ -140,10 +141,11 @@ n.times {
     valcode = agent.page.at('.ValCode').children[0] # CSSセレクタでマッチする最初の要素を取得
 
     /\w+/ =~ valcode.content
-    puts $&
+    couponcodes << $&
   }
 }
 
 threads.each{|t| t.join}
+puts couponcodes.sort
 
 __END__
